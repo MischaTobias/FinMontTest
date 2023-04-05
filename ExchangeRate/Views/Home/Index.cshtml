@@ -1,0 +1,29 @@
+﻿@model ExchangeResponse
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <label>Amount</label>
+    <input id="amount" type="number" step="0.01" onchange="onExchangeChange()"/>
+
+    @if(Model != null)
+    {
+        var ratesList = new List<SelectListItem>(Model.RatesList.Keys.Select(k => new SelectListItem() { Value = k, Text = k }));
+        var chev = 0;
+
+        <label>From</label>
+        <select id="fromCurrencyType" asp-items="ratesList" onchange="onExchangeChange()"></select>
+
+        <label>To</label>
+            <select id="toCurrencyType" asp-items="ratesList" onchange="onExchangeChange()"></select>
+    }
+
+    <label id="responseLabel"></label>
+</div>
+
+@section Scripts {
+
+   <script type="text/javascript" src="~/js/ratesExchange.js"></script>
+}
